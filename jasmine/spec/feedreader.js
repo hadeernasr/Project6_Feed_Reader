@@ -16,75 +16,79 @@ $(function() {
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
-         * empty. Experiment with this before you get started on
-         * the rest of this project. What happens when you change
-         * allFeeds in app.js to be an empty array and refresh the
-         * page?
+         * empty.
          */
         it('are Defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
-        });
+        });//end of it
 
 
-        /* TODO: Write a test that loops through each feed
+        /* A test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
          it('URLs are defined',function(){
-            for(var i in allFeeds){
-                expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url.length).not.toBe(0);
-            }
-         });
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
+            });//end of forEach
+         });//end of it
 
 
-        /* TODO: Write a test that loops through each feed
+        /* A test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
          it('Names are defined',function(){
-            for(var i in allFeeds){
-                expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].url.name).not.toBe('');
-            }
-         });
-    });
+            allFeeds.forEach(function(feed){
+                expect(feed.name).toBeDefined();
+                expect(feed.name).not.toBe('');
+                expect(feed.name.length).not.toBe(0);
+            });//end of forEach
+        });//end of it
+    });//end of Describe function
 
 
-    /* TODO: Write a new test suite named "The menu" */
-    describe('The Menu', function() {
+   /* A new test suite named "The menu" */
+    describe('Menu', function() {
 
-        /* TODO: Write a test that ensures the menu element is
+        /* A test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
-         it('Menu is hidden by default',function(){
+
+         //when page loads check to see if body has .menu-hidden
+         it('Hidden by default',function(){
             var menuHide = $('body').hasClass('menu-hidden');
             expect(menuHide).toBe(true);
-         });
+         });//end of it
 
-         /* TODO: Write a test that ensures the menu changes
+         /* A test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-          it('Menu display and hide when clicked',function(){
+
+          //check body has and does not have .menu-hidden on 
+          //every other click of menuIcon
+          it('Display and hide when clicked',function(){
             var menuIcon = $('.menu-icon-link');
             menuIcon.click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
             menuIcon.click();
             expect($('body').hasClass('menu-hidden')).toBe(true);
-          });
-    });
+          });//end of it
+    });//end of Describe function
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+
+     /* A new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
-        /* TODO: Write a test that ensures when the loadFeed
+        /* A test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test wil require
+         * loadFeed() is asynchronous so this test requires
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         //beforeEach to wait for async calls to finish
@@ -93,18 +97,19 @@ $(function() {
                 done();
             });    
         });
-
+        //checks to see if at least 1 feed entry has been added
         it('Check for Minimum one entry',function(){
             var entryNumber = $('.entry').length;
             expect(entryNumber).toBeGreaterThan(0);
-        });
-    });
+        });//end of it
+    });//end of Describe function
 
-    /* TODO: Write a new test suite named "New Feed Selection"*/
+
+     /* A new test suite named "New Feed Selection"*/
     describe('New Feed Selection', function() {
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
+         * loadFeed() is asynchronous.
          */
         var compareFeedFirst;
         var compareFeedSecond;
@@ -120,16 +125,18 @@ $(function() {
     
 
         //afterEach to reload first entry
-        afterEach(function() {
+        afterAll(function() {
             loadFeed(0);
         });
-
+        //determine that each entry is defined
+        //compares both headers from compareFeedFirst and compareFeedSecond 
+        //to detrmine that the entry has changed
         it('Changes Feed Content',function(){
             expect(compareFeedFirst).toBeDefined();
             compareFeedSecond = $('.feed').html();
             expect(compareFeedSecond).toBeDefined();
-            expect(compareFeedFirst).not.toBe(compareFeedSecond);
-        });
+            expect(compareFeedFirst).not.toEqual(compareFeedSecond);
+        });//end of it
     });//end describe
 
 }());
