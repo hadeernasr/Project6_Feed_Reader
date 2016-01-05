@@ -43,8 +43,8 @@ $(function() {
          it('Names are defined',function(){
             allFeeds.forEach(function(feed){
                 expect(feed.name).toBeDefined();
-                expect(feed.name).not.toBe('');
                 expect(feed.name.length).not.toBe(0);
+                expect(typeof feed.name).toBe('string');
             });//end of forEach
         });//end of it
     });//end of Describe function
@@ -93,7 +93,7 @@ $(function() {
          */
         //beforeEach to wait for async calls to finish
         beforeEach(function(done) {
-            loadFeed(1, function() {
+            loadFeed(0, function() {
                 done();
             });    
         });
@@ -124,9 +124,11 @@ $(function() {
         });//end beforEach
     
 
-        //afterEach to reload first entry
-        afterAll(function() {
-            loadFeed(0);
+        //afterAll to reload first entry
+        afterAll(function(done) {
+            loadFeed(0,function(){
+                done();
+            });
         });
         //determine that each entry is defined
         //compares both headers from compareFeedFirst and compareFeedSecond 
