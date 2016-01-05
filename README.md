@@ -29,11 +29,11 @@ Test RSS entry changes on menu select
 
 **How to Run:**
 
-1.Download or clone the repository and open it in your browser locally
-2.Open the folder
-3.Open index.html on your preferred browser.
-4.All needed Jasmine libraries are included, and you will see a section below the page showing the test results.
-5.To add or edit the feed sources, open js/app.js and change the allFeeds object. Ensure that you have at least 2 feeds, or else the 'New Feed Selection' test will fail.
+	1.Download or clone the repository and open it in your browser locally
+	2.Open the folder
+	3.Open index.html on your preferred browser.
+	4.All needed Jasmine libraries are included, and you will see a section below the page showing the test results.
+	5.To add or edit the feed sources, open js/app.js and change the allFeeds object. Ensure that you have at least 2 feeds, or else the 'New Feed Selection' test will fail.
 
 **Sources:**
 
